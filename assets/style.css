@@ -1,0 +1,139 @@
+/* Even's support site. Same tokens as the app (theme.ts): plain, iOS-style,
+   light or dark from the device setting. Fonts are served from this site
+   (SIL Open Font License, see assets/fonts/), nothing loads from elsewhere. */
+
+@font-face { font-family: "Hanken Grotesk"; src: url("fonts/HankenGrotesk_400Regular.ttf") format("truetype"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Hanken Grotesk"; src: url("fonts/HankenGrotesk_600SemiBold.ttf") format("truetype"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Hanken Grotesk"; src: url("fonts/HankenGrotesk_700Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "Fredoka"; src: url("fonts/Fredoka_700Bold.ttf") format("truetype"); font-weight: 700; font-display: swap; }
+
+:root {
+  --bg: #FFFFFF;
+  --surface: #F2F2F7;
+  --ink: #000000;
+  --ink-muted: #6B6B70;
+  --separator: #E5E5EA;
+  --orange: #FF7A1A;
+  --on-orange: #000000;
+  --body: "Hanken Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --display: "Fredoka", "Hanken Grotesk", -apple-system, sans-serif;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1C1C1E;
+    --surface: #2C2C2E;
+    --ink: #FFFFFF;
+    --ink-muted: #A1A1A6;
+    --separator: #3A3A3C;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left));
+  padding-right: max(16px, env(safe-area-inset-right));
+}
+
+a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 3px; overflow-wrap: anywhere; }
+a:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; border-radius: 4px; }
+
+/* Header: wordmark and the three pages */
+.site-header { border-bottom: 1px solid var(--separator); }
+.site-header .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding-block: 14px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 26px;
+  text-decoration: none;
+}
+.brand img { width: 30px; height: auto; }
+.site-nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.site-nav a {
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  color: var(--ink-muted);
+  padding: 10px 12px;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+}
+.site-nav a:hover { color: var(--ink); }
+.site-nav a[aria-current="page"] { color: var(--ink); background: var(--surface); }
+
+/* Page body */
+main { padding-block: 40px 64px; }
+h1 {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 44px);
+  line-height: 1.1;
+  margin: 0 0 8px;
+  text-wrap: balance;
+}
+.updated { color: var(--ink-muted); font-size: 15px; margin: 0 0 32px; }
+.lede { font-size: 19px; margin: 0 0 32px; }
+h2 { font-size: 22px; font-weight: 700; line-height: 1.3; margin: 40px 0 8px; text-wrap: balance; }
+h3 { font-size: 18px; font-weight: 700; margin: 24px 0 4px; }
+p, ul, ol { margin: 0 0 16px; }
+ul, ol { padding-left: 22px; }
+li { margin-bottom: 6px; }
+strong { font-weight: 700; }
+
+/* Flat cards, radius 20, no outline or shadow (like the app) */
+.card { background: var(--surface); border-radius: 20px; padding: 20px; margin: 0 0 16px; }
+.card > :last-child { margin-bottom: 0; }
+
+.contact { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+.contact img { width: 72px; height: auto; flex: none; }
+.contact div { flex: 1; min-width: 200px; }
+.email { font-weight: 700; font-size: 19px; word-break: break-all; }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--orange);
+  color: var(--on-orange);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Data table: wide content scrolls in its own box */
+.table-scroll { overflow-x: auto; margin: 0 0 16px; }
+table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 15px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--separator); }
+th { font-weight: 700; }
+
+.site-footer { border-top: 1px solid var(--separator); color: var(--ink-muted); font-size: 14px; }
+.site-footer .wrap { padding-block: 24px 32px; display: flex; flex-wrap: wrap; gap: 8px 20px; }
